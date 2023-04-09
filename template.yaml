@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Your Lambda function description
+
+Resources:
+  YourFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: your_function_name
+      Runtime: python3.9
+      Handler: your_handler_file.lambda_handler
+      CodeUri: .
+      Environment:
+        Variables:
+          SLACK_BOT_TOKEN: your_slack_bot_token
+          DISCORD_WEBHOOK_URL: your_discord_webhook_url
+          DISCORD_BOT_TOKEN: your_discord_bot_token
+          DISCORD_CHANNEL_ID: your_discord_channel_id
+      Events:
+        SlackApiGateway:
+          Type: Api
+          Properties:
+            Path: /slack
+            Method: POST
+        DiscordApiGateway:
+          Type: Api
+          Properties:
+            Path: /discord
+            Method: POST
